@@ -72,6 +72,16 @@
 		    <version>1.14.15</version>
 		</dependency>
 		
+		<!-- Dependencia para uso do banco mysql
+			Usa escopo runtime porque só é declarada em tempo de executação 
+		
+		-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
