@@ -2,11 +2,7 @@ package com.danilo.demomvc.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.MappedSuperclass;
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.*;
 
 /*
  * Classe abstrata responsável por auxiliar na criação das demais entidades
