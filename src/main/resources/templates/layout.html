@@ -30,7 +30,7 @@
 </head>
 <body>
 	<!-- representa nosso cabeçalho -->
-	<header>
+	<header th:replace="fragments/header :: cabecalho">
 		<div>header</div>
 	</header>
 	
@@ -48,8 +48,12 @@
 		</section>		
 	</div>
 	
-	<!-- rodapé do nosso layout -->
-	<footer>
+	<!-- rodapé do nosso layout
+		
+		fragments/footer :: nome do fragmento
+			lembrando que  é a pasta fragments em templates 	
+	 -->
+	<footer th:replace="fragments/footer :: rodape">
 		<div>rodapé</div>
 	</footer>
 	
