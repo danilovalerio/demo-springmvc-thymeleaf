@@ -22,12 +22,18 @@
     </nav>
 
     <div class="container" id="cadastro">
-        <form action="/departamentos/salvar" method="POST">
+    	<!--th:action fornece o contexto da aplicação através
+    		 th:object="${departamento} variável responsável por fazer a ligação entre o objeto na ida e volta
+    		 th:field="*{nome} onde nome é a propriedade lá da classe (nome do departamento)
+    	-->
+        <form th:action="@{/departamentos/salvar}" th:object="${departamento}" method="POST">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Departamento</label>
                     <input type="text" class="form-control" id="nome"
-                           placeholder="Nome Departamento" autofocus="autofocus" name="nome" value=""/>
+                           placeholder="Nome Departamento" autofocus="autofocus"
+                           th:field="*{nome}"
+					/>
                 </div>
             </div>
             <input type="hidden" id="id" name="id" value=""/>
