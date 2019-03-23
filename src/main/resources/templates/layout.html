@@ -34,16 +34,16 @@
 		<div>header</div>
 	</header>
 	
-	<div>
+	<div class="layout-main">
 		<aside>
 			<!-- menu de navegação -->
-			<nav>
+			<nav th:replace="fragments/sidebar :: nav-sidebar">
 				<span>menu</span>
 			</nav>
 		</aside>
 		
 		<!-- conteúdo principal das páginas -->
-		<section>
+		<section layout:fragment="corpo">
 			<div>conteúdo principal das páginas</div>
 		</section>		
 	</div>
