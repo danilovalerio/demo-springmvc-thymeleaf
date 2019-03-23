@@ -2,6 +2,7 @@ package com.danilo.demomvc.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,9 @@ public class DepartamentoController {
 	}
 	
 	@GetMapping("/listar")
-	public String listar() {
+	public String listar(ModelMap model) {
+		//1 parâmetro é o nome da variável que esperamos na página, 2 é a lista através do buscar todos que está no service linha 18 jão
+		model.addAttribute("departamentos", service.buscarTodos());
 		return "/departamento/lista";
 	}
 	
