@@ -66,6 +66,17 @@
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
+	
+		var url = '';
+		//button id btn_ para ao clicar em qualquer id inicial com btn venha para essa função
+		$('button[id*="btn_"]').click(function(){
+			url = "http://localhost:8085/"+ $(this).attr('id').split("_")[1]; //retorn a segunda posição do split (array)
+		});
+		
+		//Passagem da url para o botão ok (esperando o click)
+		$('#ok_confirm').click(function(){
+			document.location.href = url; //faz requisição para o servidor passando a url
+		});
 	    
 		$(function() {
 			$('[data-toggle="popover"]').popover();
@@ -76,6 +87,9 @@
 		        $(".sidebar").toggleClass("sidebar-open");
 		    })
 		});
+		
+		
+		
 
 	</script>
 
