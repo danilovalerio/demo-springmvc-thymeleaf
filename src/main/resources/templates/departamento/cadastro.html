@@ -26,7 +26,8 @@
     		 th:object="${departamento} variável responsável por fazer a ligação entre o objeto na ida e volta
     		 th:field="*{nome} onde nome é a propriedade lá da classe (nome do departamento)
     	-->
-        <form th:action="@{/departamentos/salvar}" th:object="${departamento}" method="POST">
+        <form th:action="${departamento.id == null} ? @{/departamentos/salvar} : @{/departamentos/editar}" 
+        		th:object="${departamento}" method="POST">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Departamento</label>
@@ -36,7 +37,8 @@
 					/>
                 </div>
             </div>
-            <input type="hidden" id="id" name="id" value=""/>
+            <!-- o th:field="*{id} se torna responsável por associar ao id que trazemos do objeto -->
+            <input type="hidden" id="id" th:field="*{id}"/>
             <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
         </form>
     </div>
