@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.danilo.demomvc.domain.Departamento;
 import com.danilo.demomvc.service.DepartamentoService;
@@ -32,8 +33,9 @@ public class DepartamentoController {
 	
 	//Método para cadastrar os dados que vem do formulário através do submit
 	@PostMapping("/salvar")
-	public String salvar(Departamento departamento) {
+	public String salvar(Departamento departamento, RedirectAttributes attr) {
 		service.salvar(departamento);
+		attr.addFlashAttribute("success", "Departamento salvo com sucesso.");
 		return "redirect:/departamentos/cadastrar"; //após salvar redireciona para o cadastrar dep.
 		
 	}
@@ -46,15 +48,19 @@ public class DepartamentoController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(Departamento departamento) {
+	public String editar(Departamento departamento, RedirectAttributes attr) { //por ter uma ação de redirect adicionamos o attr
 		service.editar(departamento);
+		attr.addFlashAttribute("success", "Departamento editado com sucesso.");
 		return "redirect:/departamentos/cadastrar";
 	}
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		if(!service.departamentoTemCargos(id)) {
+		if(service.departamentoTemCargos(id)) {
+			model.addAttribute("fail", "Departamento não removido, Possui cargo(s) vinculado(s).");
+		} else {
 			service.excluir(id);
+			model.addAttribute("success", "Departamento excluido com sucesso.");
 		}
 		
 		//retorna uma lista para lista.html

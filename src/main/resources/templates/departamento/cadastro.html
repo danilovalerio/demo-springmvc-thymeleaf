@@ -22,6 +22,9 @@
     </nav>
 
     <div class="container" id="cadastro">
+    
+    	<!-- Aqui está o fragmento de messagens fail/success -->
+    	<div th:replace="fragments/alert"></div>
     	<!--th:action fornece o contexto da aplicação através
     		 th:object="${departamento} variável responsável por fazer a ligação entre o objeto na ida e volta
     		 th:field="*{nome} onde nome é a propriedade lá da classe (nome do departamento)
