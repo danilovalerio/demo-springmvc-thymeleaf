@@ -20,6 +20,9 @@
     </nav>
 
     <div class="container" id="cadastro">
+    <!-- Aqui está o fragmento de mensagens fail/success -->
+    	<div th:replace="fragments/alert"></div>
+    	
         <form th:action="@{/cargos/salvar}" th:object="${cargo}" method="POST">
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -33,6 +36,7 @@
                     <label for="departamento">Departamento</label>
                     <select id="departamento" class="form-control" th:field="*{departamento}">
                         <option value="">Selecione</option>
+                        <!-- percorre os itens na variável departamentos -->
                         <option th:each="dep : ${departamentos}" 
                         	th:value="${dep.id}"
                         	th:text="${dep.nome}">Administração</option>
