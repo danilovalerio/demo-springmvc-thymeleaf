@@ -23,7 +23,9 @@
     <!-- Aqui está o fragmento de mensagens fail/success -->
     	<div th:replace="fragments/alert"></div>
     	
-        <form th:action="@{/cargos/salvar}" th:object="${cargo}" method="POST">
+    	<!-- adicionado o if ternário que avalia se o id é nulo para inserir ou editar a informação -->
+        <form th:action="${cargo.id == null} ? @{/cargos/salvar} : @{/cargos/editar} " 
+        		th:object="${cargo}" method="POST">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome do Cargo</label>
@@ -43,7 +45,8 @@
                     </select>
                 </div>
             </div>
-            <input type="hidden" id="id" name="id" value=""/>
+             <!-- o th:field="*{id} se torna responsável por associar ao id que trazemos do objeto -->
+            <input type="hidden" id="id" th:field="*{id}"/>
             <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
         </form>
     </div>

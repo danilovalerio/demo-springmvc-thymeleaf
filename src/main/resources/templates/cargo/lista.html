@@ -40,7 +40,12 @@
                     <td th:text="${cargo.nome}">Auxiliar Contábil</td>
                     <td th:text="${cargo.departamento.nome}">Contabilidade</td>
                     <td colspan="2">
-                        <a class="btn btn-info btn-sm" href="/cargos/editar/1" role="button">
+                    <!--Atribuição do link com o thymeleaf passando a variável id para edição no controller 
+                    		@{/cargos/editar/{id} 
+                    		
+                    		declarando que a variável id é igual a cargo.id que foi carregada na lista
+                    		(id=${cargo.id}) } -->
+                        <a class="btn btn-info btn-sm" th:href="@{/cargos/editar/{id} (id=${cargo.id})}" role="button">
                             <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
                         </a>
                         <button type="button" class="btn btn-danger btn-sm" >
