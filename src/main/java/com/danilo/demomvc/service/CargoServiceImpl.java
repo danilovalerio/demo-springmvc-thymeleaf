@@ -44,5 +44,14 @@ public class CargoServiceImpl implements CargoService {
 	public List<Cargo> buscarTodos() {
 		return dao.findAll();
 	}
+	
+	//Busca funcionário por id retorno true ou false
+	@Override
+	public boolean cargoTemFuncionarios(Long id) {
+		if(buscarPorId(id).getFuncionarios().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 
 }
