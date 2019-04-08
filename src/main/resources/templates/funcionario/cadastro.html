@@ -25,6 +25,7 @@
     <div class="container" id="cadastro">
     <!-- Aqui está o fragmento de mensagens fail/success -->
     	<div th:replace="fragments/alert"></div>
+    	
         <form th:action="@{/funcionarios/salvar}" th:object="${funcionario}" method="POST">
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -35,12 +36,12 @@
 
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="salario">Salário Bruto</label>
-                    <!-- máscara de salário se encontrar em layout.html
+                <!-- máscara de salário se encontrar em layout.html
                     src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"
                     ativada através do data-mask e o formato de trabalho do dado
                      -->
+                <div class="form-group col-md-6">
+                    <label for="salario">Salário Bruto</label>
                     <input type="text" class="form-control" id="salario" data-mask="#.##0,00"
                            data-mask-reverse="true" th:field="*{salario}"/>
                     <div class="invalid-feedback">
@@ -81,7 +82,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="cidade">Cidade</label>
-                    <input type="text" class="form-control" id="cidade" th.field="*{endereco.cidade}"/>
+                    <input type="text" class="form-control" id="cidade" th:field="*{endereco.cidade}"/>
                     <div class="invalid-feedback">
 
                     </div>
@@ -89,7 +90,7 @@
                 <div class="form-group col-md-6">
                     <label for="logradouro">Logradouro</label>
                     <input type="text" class="form-control" id="logradouro" placeholder="logradouro sem número"
-                           th.field="*{endereco.logradouro}"/>
+                           th:field="*{endereco.logradouro}"/>
                     <div class="invalid-feedback">
 
                     </div>
@@ -98,7 +99,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="numero">Número</label>
-                    <input type="text" class="form-control" id="numero" th.field="*{endereco.numero}"/>
+                    <input type="text" class="form-control" id="numero" th:field="*{endereco.numero}"/>
                     <div class="invalid-feedback">
 
                     </div>
@@ -106,7 +107,7 @@
                 <div class="form-group col-md-6">
                     <label for="complemento">Complemento</label>
                     <input type="text" class="form-control" id="complemento" placeholder="fundos, casa, AP. 102, .."
-                           th.field="*{endereco.complemento}"/>
+                           th:field="*{endereco.complemento}"/>
                     <div class="invalid-feedback">
 
                     </div>
@@ -115,16 +116,18 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="bairro">Bairro</label>
-                    <input type="text" class="form-control" id="bairro" th.field="*{endereco.bairro}"/>
+                    <input type="text" class="form-control" id="bairro" th:field="*{endereco.bairro}"/>
                     <div class="invalid-feedback">
 
                     </div>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="uf">UF</label>
-                    <select id="uf" class="form-control" th.field="*{endereco.uf}">
+                    <select id="uf" class="form-control" th:field="*{endereco.uf}">
                         <option value="">Selecione...</option>
-                        <option th.each="uf : ${ufs}" th.value="${uf}" th:text="${uf.sigla}">AC</option>
+                        <option th:each="uf : ${ufs}" 
+                        		th:value="${uf}" 
+                        		th:text="${uf.sigla}"></option>
                     </select>
                     <div class="invalid-feedback">
 
@@ -133,7 +136,7 @@
                 <div class="form-group col-md-2">
                     <label for="cep">Cep</label>
                     <input type="text" class="form-control" id="cep" data-mask="00000-000" 
-                    		th.field="*{endereco.cep}"/>
+                    		th:field="*{endereco.cep}"/>
                     <div class="invalid-feedback">
 
                     </div>

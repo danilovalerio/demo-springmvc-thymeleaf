@@ -52,6 +52,7 @@ public class FuncionarioController {
 	}
 	
 	//Envia a lista (array) de ufs que são ENUMS que são constantes para a página
+	@ModelAttribute("ufs")//retorna a variável 'ufs' na página
 	public UF[] getUFs() {
 		return UF.values();
 	}
