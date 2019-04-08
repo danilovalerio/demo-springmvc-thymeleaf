@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.danilo.demomvc.domain.Cargo;
 import com.danilo.demomvc.domain.Funcionario;
+import com.danilo.demomvc.domain.UF;
 import com.danilo.demomvc.service.CargoService;
 import com.danilo.demomvc.service.FuncionarioService;
 
@@ -49,5 +50,12 @@ public class FuncionarioController {
 	public List<Cargo> listaDeCargos(){
 		return cargoService.buscarTodos();
 	}
+	
+	//Envia a lista (array) de ufs que são ENUMS que são constantes para a página
+	public UF[] getUFs() {
+		return UF.values();
+	}
+	
+	
 
 }
