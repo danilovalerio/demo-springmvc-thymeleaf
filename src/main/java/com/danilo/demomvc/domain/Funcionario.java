@@ -21,7 +21,7 @@ public class Funcionario extends AbstractEntity<Long> {
 	
 	//Definido um valor de 7 digitos com 2 casas decimais e ao invés de nulo
 	//por padrão receberá 0.00
-	@NumberFormat(style = Style.CURRENCY, pattern = "###0.00") //CURRENCY é tipo moeda e padrão americano para salvar no banco
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00") //CURRENCY é tipo moeda e padrão americano para salvar no banco
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal salario;
 	
