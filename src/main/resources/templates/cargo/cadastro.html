@@ -26,6 +26,13 @@
     	<!-- adicionado o if ternário que avalia se o id é nulo para inserir ou editar a informação -->
         <form th:action="${cargo.id == null} ? @{/cargos/salvar} : @{/cargos/editar} " 
         		th:object="${cargo}" method="POST">
+        		
+        		<!-- Exibe os erros pertinentes a validação dos campos
+        			tem que ficar dentro das tag's form se não as mensagens 
+        			não serão exibidas. 
+        		-->
+        		 <div th:replace="fragments/validacao  :: validacao"></div>
+        		
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome do Cargo</label>

@@ -1,8 +1,11 @@
 package com.danilo.demomvc.web.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +36,11 @@ public class DepartamentoController {
 	
 	//Método para cadastrar os dados que vem do formulário através do submit
 	@PostMapping("/salvar")
-	public String salvar(Departamento departamento, RedirectAttributes attr) {
+	public String salvar(@Valid Departamento departamento,  BindingResult result, RedirectAttributes attr) { //@Valid informa ao SpringMVC  que estamos fazendo a validação via Bean Validation do objeto Departamento
+		if(result.hasErrors()) {
+			return "/departamento/cadastro";
+		}
+		
 		service.salvar(departamento);
 		attr.addFlashAttribute("success", "Departamento salvo com sucesso.");
 		return "redirect:/departamentos/cadastrar"; //após salvar redireciona para o cadastrar dep.
@@ -48,7 +55,11 @@ public class DepartamentoController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(Departamento departamento, RedirectAttributes attr) { //por ter uma ação de redirect adicionamos o attr
+	public String editar(@Valid Departamento departamento, BindingResult result, RedirectAttributes attr) { //por ter uma ação de redirect adicionamos o attr
+		if(result.hasErrors()) {
+			return "/departamento/cadastro";
+		}
+				
 		service.editar(departamento);
 		attr.addFlashAttribute("success", "Departamento editado com sucesso.");
 		return "redirect:/departamentos/cadastrar";

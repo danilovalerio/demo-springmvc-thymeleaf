@@ -2,9 +2,12 @@ package com.danilo.demomvc.web.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +43,12 @@ public class CargoController {
 	
 	//Realiza o cadastro do cargo
 	@PostMapping("/salvar")
-	public String salvar(Cargo cargo, RedirectAttributes attr) {
+	public String salvar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) { //@Valid informa ao SpringMVC  que estamos fazendo a validação via Bean Validation do objeto cargo
+		//Objeto BindingResult é um objeto do SpringMVC e avalia se teve algum problema com as validações
+		if(result.hasErrors()) { //se algum campo não passou na validação já retorna o erro
+			return "/cargo/cadastro";
+		}
+		
 		cargoService.salvar(cargo);
 		attr.addFlashAttribute("success", "Cargo inserido com sucesso.");
 		return "redirect:/cargos/cadastrar";//após salvamento redireciona para o acadastro
@@ -60,7 +68,12 @@ public class CargoController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(Cargo cargo, RedirectAttributes attr) {
+	public String editar(@Valid Cargo cargo,  BindingResult result, RedirectAttributes attr) { //@Valid informa ao SpringMVC  que estamos fazendo a validação via Bean Validation do objeto cargo
+		//Objeto BindingResult é um objeto do SpringMVC e avalia se teve algum problema com as validações
+		if(result.hasErrors()) {
+			return "/cargo/cadastro";
+		}
+		
 		cargoService.editar(cargo);
 		//envia para a página a mensagem de sucesso no caso do registro com sucesso 
 		attr.addFlashAttribute("success", "Registro atualizado com sucesso.");
