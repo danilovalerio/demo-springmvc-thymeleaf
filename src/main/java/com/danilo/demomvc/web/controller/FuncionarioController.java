@@ -10,7 +10,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,7 @@ import com.danilo.demomvc.domain.Funcionario;
 import com.danilo.demomvc.domain.UF;
 import com.danilo.demomvc.service.CargoService;
 import com.danilo.demomvc.service.FuncionarioService;
+import com.danilo.demomvc.web.validator.FuncionarioValidator;
 
 @Controller
 @RequestMapping("/funcionarios")
@@ -32,6 +35,13 @@ public class FuncionarioController {
 	
 	@Autowired
 	private CargoService cargoService;
+	
+	//Inicia o método antes de liberar o request assim executando as validações necessárias
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		//provem acesso a classe FuncionarioValidator
+		binder.addValidators(new FuncionarioValidator());
+	}
 	
 	
 	@GetMapping("/cadastrar")
