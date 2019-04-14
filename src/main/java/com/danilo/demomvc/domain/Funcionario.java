@@ -34,7 +34,7 @@ public class Funcionario extends AbstractEntity<Long> {
 	
 	//Formatação oferecida pelo Spring que são 3 tipos 
 	//(DATE> Só para data DATE_TIME > data e hora ou TIME> Que é só para a hora
-	@PastOrPresent(message= "PastOrPresent.funcionario.dataEntrada}") //Validação no arquivo ValidationMEssages.properties
+	@PastOrPresent(message= "{PastOrPresent.funcionario.dataEntrada}") //Validação no arquivo ValidationMEssages.properties
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_entrada", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataEntrada;
