@@ -4,7 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.*;
-
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -16,17 +20,21 @@ import org.springframework.format.annotation.NumberFormat.Style;
 @Table(name = "FUNCIONARIOS")
 public class Funcionario extends AbstractEntity<Long> {
 	
+	@NotBlank
+	@Size(max=255, min=3)
 	@Column(nullable = false, unique = true)
 	private String nome;
 	
 	//Definido um valor de 7 digitos com 2 casas decimais e ao invés de nulo
 	//por padrão receberá 0.00
+	@NotNull
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00") //CURRENCY é tipo moeda e padrão americano para salvar no banco
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal salario;
 	
 	//Formatação oferecida pelo Spring que são 3 tipos 
 	//(DATE> Só para data DATE_TIME > data e hora ou TIME> Que é só para a hora
+	@PastOrPresent(message= "PastOrPresent.funcionario.dataEntrada}") //Validação no arquivo ValidationMEssages.properties
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_entrada", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataEntrada;
@@ -40,6 +48,7 @@ public class Funcionario extends AbstractEntity<Long> {
 	//inserir um funcionário tem que inserir um endereço e se
 	//editarmos o endereço no funcionário também editatará por padrão
 	//quando excluir um funcionário também excluirá o endereço da base
+	@Valid //Esse objeto deve ser validado de acordo com as validações da classe endereço
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id_fk")
 	private Endereco endereco;
