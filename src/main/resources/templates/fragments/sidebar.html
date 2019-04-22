@@ -7,7 +7,9 @@
 <nav class="sidebar sidebar-open" th:fragment="nav-sidebar">
 	<ul class="nav nav-pills">
 		<li class="nav-item"><a class="nav-link " href="/"> <i
-				class="oi oi-home"></i> <span>Home</span>
+				class="oi oi-home"></i>
+				<!-- #{sidebar.link.home} é o link de messages.properties configurado no back end -->
+				<span th:text="#{sidebar.link.home}"></span>
 		</a></li>
 	</ul>
 
