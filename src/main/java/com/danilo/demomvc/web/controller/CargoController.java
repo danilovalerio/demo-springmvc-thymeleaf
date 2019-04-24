@@ -31,14 +31,14 @@ public class CargoController {
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Cargo cargo) {
-		return "/cargo/cadastro";
+		return "cargo/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {//ModelMap model adicionado para listar no html
 		//adicionamos todos os cargos na 'variável' cargos e passamos para o front
 		model.addAttribute("cargos", cargoService.buscarTodos());
-		return "/cargo/lista";
+		return "cargo/lista";
 	}
 	
 	//Realiza o cadastro do cargo
@@ -46,7 +46,7 @@ public class CargoController {
 	public String salvar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) { //@Valid informa ao SpringMVC  que estamos fazendo a validação via Bean Validation do objeto cargo
 		//Objeto BindingResult é um objeto do SpringMVC e avalia se teve algum problema com as validações
 		if(result.hasErrors()) { //se algum campo não passou na validação já retorna o erro
-			return "/cargo/cadastro";
+			return "cargo/cadastro";
 		}
 		
 		cargoService.salvar(cargo);
@@ -64,14 +64,14 @@ public class CargoController {
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) { //ModelMap utilizado para enviar os dados lá para tela de cadastro
 		model.addAttribute("cargo", cargoService.buscarPorId(id));
-		return "/cargo/cadastro";
+		return "cargo/cadastro";
 	}
 	
 	@PostMapping("/editar")
 	public String editar(@Valid Cargo cargo,  BindingResult result, RedirectAttributes attr) { //@Valid informa ao SpringMVC  que estamos fazendo a validação via Bean Validation do objeto cargo
 		//Objeto BindingResult é um objeto do SpringMVC e avalia se teve algum problema com as validações
 		if(result.hasErrors()) {
-			return "/cargo/cadastro";
+			return "cargo/cadastro";
 		}
 		
 		cargoService.editar(cargo);

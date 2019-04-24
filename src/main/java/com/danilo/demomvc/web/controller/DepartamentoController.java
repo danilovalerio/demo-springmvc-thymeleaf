@@ -24,21 +24,21 @@ public class DepartamentoController {
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Departamento departamento) {
-		return "/departamento/cadastro";
+		return "departamento/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		//1 parâmetro é o nome da variável que esperamos na página, 2 é a lista através do buscar todos que está no service linha 18 jão
 		model.addAttribute("departamentos", service.buscarTodos());
-		return "/departamento/lista";
+		return "departamento/lista";
 	}
 	
 	//Método para cadastrar os dados que vem do formulário através do submit
 	@PostMapping("/salvar")
 	public String salvar(@Valid Departamento departamento,  BindingResult result, RedirectAttributes attr) { //@Valid informa ao SpringMVC  que estamos fazendo a validação via Bean Validation do objeto Departamento
 		if(result.hasErrors()) {
-			return "/departamento/cadastro";
+			return "departamento/cadastro";
 		}
 		
 		service.salvar(departamento);
@@ -50,14 +50,14 @@ public class DepartamentoController {
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("departamento", service.buscarPorId(id));
-		return "/departamento/cadastro";
+		return "departamento/cadastro";
 		
 	}
 	
 	@PostMapping("/editar")
 	public String editar(@Valid Departamento departamento, BindingResult result, RedirectAttributes attr) { //por ter uma ação de redirect adicionamos o attr
 		if(result.hasErrors()) {
-			return "/departamento/cadastro";
+			return "departamento/cadastro";
 		}
 				
 		service.editar(departamento);

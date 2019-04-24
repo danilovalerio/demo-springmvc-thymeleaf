@@ -16,7 +16,7 @@ public class MyErrorView implements ErrorViewResolver {
 	@Override
 	public ModelAndView resolveErrorView(HttpServletRequest request, HttpStatus status, Map<String, Object> map) {
 		
-		ModelAndView model = new ModelAndView("/error");
+		ModelAndView model = new ModelAndView("error");
 		model.addObject("status", status.value());
 		//Se ocorrer novas mensagens de erros com outros status podem ser incluídos aqui no tratamento também
 		switch (status.value()) {
