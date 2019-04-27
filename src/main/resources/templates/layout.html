@@ -70,7 +70,8 @@
 		var url = '';
 		//button id btn_ para ao clicar em qualquer id inicial com btn venha para essa função
 		$('button[id*="btn_"]').click(function(){
-			url = "http://localhost:8085/"+ $(this).attr('id').split("_")[1]; //retorn a segunda posição do split (array)
+			//url = "http://localhost:8085/"+ $(this).attr('id').split("_")[1]; //retorn a segunda posição do split (array)
+			url = "/"+ $(this).attr('id').split("_")[1]; //versão para o heroku
 		});
 		
 		//Passagem da url para o botão ok (esperando o click)
